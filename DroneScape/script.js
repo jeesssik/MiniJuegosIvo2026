@@ -288,8 +288,8 @@ function execute() {
     if (step >= sequence.length) {
       // All commands used — drone did not reach exit
       isRunning = false;
-      setControlsEnabled(true);
-      setStatus('Secuencia incompleta. El drone no llegó a la salida.', 'error');
+      setStatus('Secuencia incompleta. Intento fallido. Reiniciando nivel…', 'error');
+      setTimeout(() => initLevel(currentLevelIdx), 900);
       return;
     }
 
