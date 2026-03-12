@@ -79,6 +79,33 @@ const DIRS = {
   RIGHT: { dr:  0, dc:  1, arrow: '→' },
 };
 
+const DRONE_IMG_SRC =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#9ff6ff"/>
+          <stop offset="100%" stop-color="#00d4ff"/>
+        </linearGradient>
+      </defs>
+      <circle cx="16" cy="16" r="8" fill="none" stroke="url(#g)" stroke-width="3"/>
+      <circle cx="48" cy="16" r="8" fill="none" stroke="url(#g)" stroke-width="3"/>
+      <circle cx="16" cy="48" r="8" fill="none" stroke="url(#g)" stroke-width="3"/>
+      <circle cx="48" cy="48" r="8" fill="none" stroke="url(#g)" stroke-width="3"/>
+      <line x1="22" y1="20" x2="42" y2="20" stroke="#8fefff" stroke-width="2"/>
+      <line x1="22" y1="44" x2="42" y2="44" stroke="#8fefff" stroke-width="2"/>
+      <line x1="20" y1="22" x2="20" y2="42" stroke="#8fefff" stroke-width="2"/>
+      <line x1="44" y1="22" x2="44" y2="42" stroke="#8fefff" stroke-width="2"/>
+      <rect x="24" y="24" width="16" height="16" rx="4" fill="#0c1b2c" stroke="#7ee8ff" stroke-width="2.5"/>
+      <circle cx="32" cy="32" r="3.2" fill="#00d4ff"/>
+    </svg>
+  `);
+
+function getDroneMarkup() {
+  return `<img class="cell-icon drone-icon" src="${DRONE_IMG_SRC}" alt="Drone" />`;
+}
+
 // ── Game state ───────────────────────────────────────────────
 let currentLevelIdx = 0;
 let dronePos        = { r: 0, c: 0 };
@@ -158,7 +185,7 @@ function renderMaze() {
       // Drone starting position
       if (r === dronePos.r && c === dronePos.c) {
         cell.classList.add('drone');
-        cell.innerHTML = '<span class="cell-icon drone-icon">⬡</span>';
+        cell.innerHTML = getDroneMarkup();
       }
 
       mazeEl.appendChild(cell);
@@ -190,7 +217,7 @@ function moveDrone(oldR, oldC, newR, newC) {
   if (newCell) {
     const isExit = newR === lvl.exit.r && newC === lvl.exit.c;
     newCell.classList.remove('visited');
-    newCell.innerHTML = '<span class="cell-icon drone-icon">⬡</span>';
+    newCell.innerHTML = getDroneMarkup();
     newCell.classList.add('drone');
     if (isExit) newCell.classList.add('on-exit');
   }
