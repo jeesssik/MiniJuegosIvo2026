@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DroneScape — Escapa del Firewall</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ── Header ─────────────────────────────────────────────────── -->
+    <header>
+      <div class="title-block">
+        <div class="header-drone">⬡</div>
+        <h1>DRONE<span class="accent">SCAPE</span></h1>
+      </div>
+      <p class="subtitle">Programa el drone · Evade el firewall · Escapa</p>
+    </header>
+
+    <!-- ── Game container ─────────────────────────────────────────── -->
+    <div class="game-container">
+
+      <!-- Level bar -->
+      <div class="level-bar">
+        <div class="level-info">
+          <span class="bar-label">NIVEL</span>
+          <span id="level-display" class="bar-value">01</span>
+        </div>
+        <div id="level-title" class="bar-title">Calibración Básica</div>
+        <div class="level-info">
+          <span class="bar-label">COMANDOS</span>
+          <span id="cmd-count" class="bar-value">0</span>
+          <span class="bar-sep">/</span>
+          <span id="cmd-max" class="bar-value">7</span>
+        </div>
+      </div>
+
+      <!-- Main area -->
+      <div class="main-area">
+
+        <!-- Maze -->
+        <div class="maze-wrapper">
+          <div class="maze-corner-label">ZONA&nbsp;FIREWALL</div>
+          <div id="maze" class="maze"></div>
+          <div class="maze-legend">
+            <span class="legend-item"><span class="l-drone">⬡</span> Drone</span>
+            <span class="legend-item"><span class="l-exit">⊙</span> Salida</span>
+            <span class="legend-item"><span class="l-wall">▪</span> Firewall</span>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-panel">
+
+          <!-- Objective -->
+          <div class="panel-section objective-box">
+            <div class="section-header">▸ OBJETIVO</div>
+            <p id="level-desc">Guía el drone hasta la salida del firewall.</p>
+          </div>
+
+          <!-- D-Pad -->
+          <div class="panel-section">
+            <div class="section-header">▸ COMANDOS DE VUELO</div>
+            <div class="dpad">
+              <div class="dpad-row">
+                <button class="dpad-btn" data-dir="UP">↑</button>
+              </div>
+              <div class="dpad-row">
+                <button class="dpad-btn" data-dir="LEFT">←</button>
+                <div class="dpad-center">✦</div>
+                <button class="dpad-btn" data-dir="RIGHT">→</button>
+              </div>
+              <div class="dpad-row">
+                <button class="dpad-btn" data-dir="DOWN">↓</button>
+              </div>
+            </div>
+            <p class="keyboard-hint">También puedes usar las teclas ↑ ↓ ← →</p>
+          </div>
+
+          <!-- Sequence -->
+          <div class="panel-section">
+            <div class="section-header">▸ SECUENCIA PROGRAMADA</div>
+            <div id="sequence" class="sequence-display">
+              <span class="seq-placeholder">— sin comandos —</span>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="panel-section">
+            <div class="action-buttons">
+              <button id="btn-execute" class="btn btn-execute">▶ EJECUTAR</button>
+              <button id="btn-undo"    class="btn btn-undo">⌫ DESHACER</button>
+              <button id="btn-reset"   class="btn btn-reset">↺ REINICIAR</button>
+            </div>
+          </div>
+
+          <!-- Status -->
+          <div id="status-msg" class="status-msg"></div>
+
+        </div><!-- /controls-panel -->
+      </div><!-- /main-area -->
+    </div><!-- /game-container -->
+
+    <!-- Concepts bar -->
+    <div class="concepts-bar">
+      <span class="concept-tag">📐 Algoritmos</span>
+      <span class="concept-tag">🔢 Secuencias</span>
+      <span class="concept-tag">🧠 Planificación</span>
+    </div>
+
+  </div><!-- /app -->
+
+  <!-- ── Victory overlay ──────────────────────────────────────────── -->
+  <div id="overlay" class="overlay hidden">
+    <div class="overlay-card">
+      <div class="overlay-glow"></div>
+      <div id="overlay-icon" class="overlay-icon">✓</div>
+      <h2 id="overlay-title">¡FIREWALL EVADIDO!</h2>
+      <p id="overlay-msg">El drone escapó del sistema.</p>
+      <div class="overlay-stats">
+        <div class="stat-item">
+          <span class="stat-label">COMANDOS USADOS</span>
+          <span id="stat-cmds" class="stat-value">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">NIVEL</span>
+          <span id="stat-lvl" class="stat-value">01</span>
+        </div>
+      </div>
+      <button id="btn-next" class="btn btn-execute btn-overlay">SIGUIENTE NIVEL →</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
